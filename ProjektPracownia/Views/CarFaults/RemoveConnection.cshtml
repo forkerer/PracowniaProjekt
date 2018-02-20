@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "ConnectTo";
+}
+
+<script type="text/javascript">
+
+
+        function RemoveConnection(faultID, versionID) {
+            var url = "/CarFaults/DisconnectFault/";
+            alert(url);
+            $.ajax({
+                url: url,
+                data: { faultID: faultID, versionID: @ViewBag.versionID },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+
+                    //window.location.href = '/CarEdit/Index';
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            })
+        };
+</script>
+
+<div class="container" style="width:100%;height:100px">
+    <div class="row conRemove">
+        <div class="col-lg-4 conRemove">
+            <div class="conRemove conRemoveLab">
+                @ViewBag.versionName
+            </div>
+        </div>
+        <div class="col-lg-4 conRemove">
+            <button id="approveDelete" onclick="javascript: RemoveConnection(@ViewBag.faultID, @ViewBag.versionID);">
+                Delete connection
+            </button>
+        </div>
+        <div class="col-lg-4 conRemove">
+            <div class="conRemove conRemoveLab">
+                @ViewBag.faultName
+            </div>
+        </div>
+    </div>
+</div>
+

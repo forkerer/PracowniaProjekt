@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewData["Title"] = "View";
+}
+
+<script type="text/javascript">
+    $(document).ready(setAutocomplete);// = setAutocomplete();
+    function setAutocomplete() {
+        var url = "/CarSearch/GetAutocompleteData/";
+
+        $.ajax({
+            url: url,
+            data: {},
+            cache: false,
+            type: "POST",
+            success: function (data) {
+                $("#inputFault").typeahead({
+                    source: data,
+                    afterSelect: function (data) {
+                        GetFaultsFromInput(data)
+                    }
+                });
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+
+
+    };
+
+    function GetFaultsFromInput(data) {
+        GetFaults("fault"+data.id, data.name)
+
+    }
+    function GetFaults(faultID, faultName) {
+        var procemessage = "<option value='0'> Please wait...</option>";
+        $("#FaultButton").html(procemessage).show();
+        $("#inputFault").val = procemessage
+
+        faultID = faultID.replace("fault", "");
+        var url = "/CarSearch/GetCarsByFaultID/";
+
+        $.ajax({
+            url: url,
+            data: { faultID: faultID },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+
+                $("#FaultButton").html(faultName).show();
+                $("#inputFault").val = faultName
+
+                var markup = "";
+                markup += "<tr>";
+                markup += "<th>Car make</th>";
+                markup += "<th>Car model</th>";
+                markup += "<th>Car version</th>";
+                markup += "<th>Fault cost</th>";
+                markup += "</tr>";
+                for (var x = 0; x < data.length; x++) {
+                    markup += "<tr>";
+                    markup += "<td>" + data[x].carMake + "</td>";
+                    markup += "<td>" + data[x].carModel + "</td>";
+                    markup += "<td>" + data[x].carVersion + "</td>";
+                    markup += "<td>" + data[x].faultCost + "</td>";
+                    markup += "</tr>";
+                    //markup += "<option value=" + data[x].carVersionID.toString() + ">" + data[x].version + "</option>";
+
+                }
+                $("#faultsTable").html(markup).show();
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+    }
+
+</script>
+
+<h2>Select issue</h2>
+<div class="container" style="width:100%">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="btn-group">
+                <button id="FaultButton" type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown">
+                    Select car fault <span class="caret"></span>
+
+                </button>
+                <ul id="faultSelect" class="dropdown-menu" role="menu">
+                    @foreach (CarFault item in ViewBag.faultsList)
+                    {
+                        var text = "\"" + item.name + "\"";
+                        <li id="fault@(item.CarFaultID)" onclick="javascript: GetFaults(this.id, @text);">
+                            <a href="#" style="position:center">@item.name</a>
+                        </li>
+
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <input id="inputFault" type="text" class="typeahead form-control" data-provide="typeahead" >
+        </div>
+    </div>
+</div>
+
+
+<div class="tableDiv">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @ViewBag.faultsText
+                </th>
+            </tr>
+        </thead>
+        <tbody id="faultsTable"></tbody>
+    </table>
+</div>

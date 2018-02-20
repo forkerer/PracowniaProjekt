@@ -1,0 +1,230 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    
+</style>
+
+<script language="javascript" type="text/javascript">
+    function GetCarModels(_carMake, name) {
+        var procemessage = "<option value='0'> Please wait...</option>";
+        $("#MakeButton").html(procemessage).show();
+        $("#faultsTable").html("Please select car model and version.").show();
+        //$("#VersionButton").html(procemessage).show();
+        
+        //alert(_carMake = " - " + name)
+        _carMake = _carMake.replace("make", "");
+        var url = "/FaultSearch/GetModelsByMake/";
+
+        $.ajax({
+            url: url,
+            data: { carMake: _carMake },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+                $("#MakeButton").html(name).show();
+                $("#ModelButton").html("Select car model").show();
+                var markup = "";
+                for (var x = 0; x < data.length; x++) {
+                    markup += "<li id=model" + data[x].carModelID + " onclick=\'javascript: GetCarVersions(this.id,\""+data[x].model+"\");\'>"
+                    markup += "<a href=\"#\" stype=\"position:center\">" + data[x].model + "</a>"
+                }
+                $("#modelSelect").html(markup);
+                $('.dropdown-toggle').dropdown();
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+
+    }
+
+    function GetCarVersions(_carModel, name) {
+        var procemessage = "<option value='0'> Please wait...</option>";
+        $("#VersionButton").html(procemessage).show();
+        $("#faultsTable").html("Please select car model and version.").show();
+        var url = "/FaultSearch/GetVersionsByModel/";
+        _carModel = _carModel.replace("model", "");
+
+        $.ajax({
+            url: url,
+            data: { carModel: _carModel },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+                $("#ModelButton").html(name).show();
+                $("#VersionButton").html("Select car version").show();
+
+                var markup = "";
+                for (var x = 0; x < data.length; x++) {
+                    markup += "<li id=version" + data[x].carVersionID + " onclick=\'javascript: GetVersionFaults(this.id,\"" + data[x].version + "\");\'>"
+                    markup += "<a href=\"#\" stype=\"position:center\">" + data[x].version + "</a>"
+                }
+                $("#versionSelect").html(markup);
+                $('.dropdown-toggle').dropdown();
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+
+        var url2 = "/FaultSearch/GetFaultsForModel/";
+        $.ajax({
+            url: url2,
+            data: { carModel: _carModel },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+
+                var markup = "";
+                markup += "<tr>";
+                markup += "<th>Fault name</th>";
+                markup += "<th>Fault severity</th>";
+                markup += "<th>Fault repair cost</th>";
+                markup += "</tr>";
+                for (var x = 0; x < data.length; x++) {
+                    var backColor = GetColorBasedOnSeverity(data[x].faultSeverity);
+                    var textColor = GetTextColorBasedOnSeverity(data[x].faultSeverity);
+                    markup += "<tr style=\"background-color:" + backColor + "!important ;color:" + textColor + " !important\">";
+                    markup += "<td>" + data[x].faultName + "</td>";
+                    markup += "<td>" + data[x].faultSeverity + "</td>";
+                    markup += "<td>" + data[x].faultCost + "</td>";
+                    markup += "</tr>";
+                    //markup += "<option value=" + data[x].carVersionID.toString() + ">" + data[x].version + "</option>";
+
+                }
+                $("#faultsTable").html(markup).show();
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+
+    }
+
+    function GetVersionFaults(_carVersion) {
+        var procemessage = "<option value='0'> Please wait...</option>";
+        $("#faultsTable").html(procemessage).show();
+        var url = "/FaultSearch/GetVersionFaults/";
+        _carVersion = _carVersion.replace("version", "");
+
+        $.ajax({
+            url: url,
+            data: { carVersion: _carVersion },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+                //alert(data);
+                var markup = "";
+                markup += "<tr>";
+                markup += "<th>Fault name</th>";
+                markup += "<th>Fault severity</th>";
+                markup += "<th>Fault repair cost</th>";
+                markup += "</tr>";
+                for (var x = 0; x < data.length; x++) {
+                    var backColor = GetColorBasedOnSeverity(data[x].faultSeverity);
+                    var textColor = GetTextColorBasedOnSeverity(data[x].faultSeverity);
+                    markup += "<tr style=\"background-color:" + backColor + "!important ;color:" + textColor + " !important\">";
+                        markup += "<td>" + data[x].faultName + "</td>";
+                        markup += "<td>" + data[x].faultSeverity + "</td>";
+                        markup += "<td>" + data[x].faultCost + "</td>";
+                        markup += "</tr>";
+                    //markup += "<option value=" + data[x].carVersionID.toString() + ">" + data[x].version + "</option>";
+
+                }
+                $("#faultsTable").html(markup).show();
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+
+    }
+
+    function GetColorBasedOnSeverity(severity) {
+        if (severity === "SERIOUS") {
+            return "#F59693";
+        }
+        else if (severity === "MEDIUM") {
+            return "#8CD9EE";
+        }
+        else {
+            return "#48C9B0";
+        }
+        return "#F1F1F1";
+    }
+
+    function GetTextColorBasedOnSeverity(severity) {
+        if (severity === "SERIOUS") {
+            return "#222";
+        }
+        else if (severity === "MEDIUM") {
+            return "#222";
+        }
+        else {
+            return "#222";
+        }
+        return "#222";
+    }
+
+</script>
+
+<h2>@ViewBag.titleText</h2>
+<div class="container" style="width:100%">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="btn-group">
+                <button id="MakeButton" type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown">
+                    Select car make <span class="caret"></span>
+
+                </button>
+                <ul id="makeSelect" class="dropdown-menu" role="menu">
+                    @foreach (SelectListItem item in ViewBag.dropList)
+                    {
+                        var text = "\"" + item.Text + "\"";
+                        <li id="make@(item.Value)" onclick="javascript: GetCarModels(this.id, @text);">
+                            <a href="#" style="position:center">@item.Text</a>
+                        </li>
+
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="btn-group">
+                <button id="ModelButton" type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown">
+                    Select car model <span class="caret"></span>
+
+                </button>
+                <ul id="modelSelect" class="dropdown-menu" role="menu">
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="btn-group">
+                <button id="VersionButton" type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown">
+                    Select car version <span class="caret"></span>
+
+                </button>
+                <ul id="versionSelect" class="dropdown-menu" role="menu">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tableDiv">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @ViewBag.faultsText
+                </th>
+            </tr>
+        </thead>
+        <tbody id="faultsTable"></tbody>
+    </table>
+</div>

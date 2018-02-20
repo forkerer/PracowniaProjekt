@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+<script>
+</script>
+<h2>Edit mode</h2>
+
+
+
+<div class="tableDiv">
+    <table class="table table-condensed">
+        <thead>
+        </thead>
+        <tbody id="faultsTable">
+            <tr>
+                <td colspan="3" class="carMakeLabel">Car fault</td>
+            </tr>
+            <tr>
+                <td class="faultpls"> Fault name</td>
+                <td class="faultpls"> Fault cost</td>
+                <td class="faultpls"></td>
+            </tr>
+            @foreach (var item in (IEnumerable<ProjektPracownia.Models.CarFault>)ViewBag.carFaults)
+            {
+                <tr id="makeEdit@(item.CarFaultID)">
+                    <td> @item.name</td>
+                    <td> @item.fixCost</td>
+                    <td class="editMakeFunc">
+                        <a asp-controller="CarFaults" asp-action="Edit" asp-route-id="@item.CarFaultID">Edit</a> |
+                        <a asp-controller="CarFaults" asp-action="Details" asp-route-id="@item.CarFaultID">Details</a> |
+                        <a asp-controller="CarFaults" asp-action="Delete" asp-route-id="@item.CarFaultID">Delete</a>
+                    </td>
+                </tr>
+            }
+
+            <tr>
+                <td colspan="3" id="carNewMake">
+                    <a asp-controller="CarFaults" asp-action="Create">New fault</a>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>

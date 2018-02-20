@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewData["Title"] = "ConnectTo";
+}
+
+<script type="text/javascript">
+    
+
+        function ConnectFaultsFromInput(data) {
+            faultConnect("fault" + data.id, data.name)
+
+        };
+
+        function faultConnect(faultID, faultName) {
+            faultID = faultID.replace("fault", "");
+            var url = "/CarFaults/ConnectFault/";
+
+            $.ajax({
+                url: url,
+                data: { faultID: faultID, versionID: @ViewBag.versionID },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+
+                    window.location.href = '/CarEdit/Index';
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            })
+        };
+        $(document).ready(setAutocomplete);
+        function setAutocomplete() {
+            var url = "/CarSearch/GetAutocompleteData/";
+
+            $.ajax({
+                url: url,
+                data: {},
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    $("#inputFault").typeahead({
+                        source: data,
+                        afterSelect: function (data) {
+                            ConnectFaultsFromInput(data)
+                        }
+                    });
+                },
+                error: function (reponse) {
+                    alert("error : " + reponse);
+                }
+            });
+    };
+</script>
+
+<text class="connectText">Select issue to connect to Car Version: @ViewBag.versionName</text>
+<div class="container" style="width:100%">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="btn-group">
+                <button id="FaultButton" type="button" class="btn btn-default  dropdown-toggle" data-toggle="dropdown">
+                    Select car fault <span class="caret"></span>
+
+                </button>
+                <ul id="faultSelect" class="dropdown-menu" role="menu">
+                    @foreach (CarFault item in ViewBag.faultsList)
+                    {
+                        var text = "\"" + item.name + "\"";
+                        <li id="fault@(item.CarFaultID)" onclick="javascript: faultConnect(this.id, @text);">
+                            <a href="#" style="position:center">@item.name</a>
+                        </li>
+
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <input id="inputFault" type="text" class="typeahead form-control" data-provide="typeahead">
+        </div>
+    </div>
+</div>
+

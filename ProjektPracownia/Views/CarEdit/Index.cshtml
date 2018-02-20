@@ -1,0 +1,212 @@
+﻿
+@{
+    ViewData["Title"] = "CarEdit Index";
+}
+
+<script>
+    function getModelHeader() {
+        var str = "";
+        str += "<tr><td colspan=\"2\" class=\"carMakeLabel\">Car model</td></tr>";
+        return str;
+    }
+    function addModelCreate(str, makeId) {
+        str += "<tr><td colspan=\"2\" id=\"carNewModel\"><a href=\"CarModels/Create/" + makeId + "\">New model</a></td></tr>";
+        return str;
+    }
+
+    function selectMake(makeID) {
+        var procemessage = "<option value='0'> Please wait...</option>";
+        $("#modelsTable").html("").show();
+        $("#versionsTable").html("").show();
+        $("#faultsTable").html("").show();
+        var url = "/FaultSearch/GetModelsByMake/";
+        makeID = makeID.replace("makeEdit", "");
+        $.ajax({
+            url: url,
+            data: { carMake: makeID },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+                //alert(data);
+                var markup = getModelHeader();
+
+                for (var x = 0; x < data.length; x++) {
+
+                    markup += "<tr id=\"modelEdit" + data[x].carModelID + "\" onclick=\"selectModel(this.id);\">";
+                    markup += "<td>" + data[x].model + "</td>";
+                    markup += "<td class=\"editMakeFunc\">";
+                    markup += "<a href=\"/CarModels/Edit/" + data[x].carModelID + "\">Edit</a> |";
+                    markup += "<a href=\"/CarModels/Details/" + data[x].carModelID + "\">Details</a> |";
+                    markup += "<a href=\"/CarModels/Delete/" + data[x].carModelID + "\">Delete</a> |";
+                    markup += "</td>";
+                    markup += "</tr>";
+
+                    
+                }
+                markup = addModelCreate(markup, makeID);
+                $("#modelsTable").html(markup).show();
+                //markup += "<option value=" + data[x].carVersionID.toString() + ">" + data[x].version + "</option>";
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        })
+    };
+
+    function getVersionHeader() {
+        var str = "";
+        str += "<tr><td colspan=\"2\" class=\"carMakeLabel\">Car Version</td></tr>";
+        return str;
+    }
+    function addVersionCreate(str, modelID) {
+        str += "<tr><td colspan=\"2\" id=\"carNewVersion\"><a href=\"CarVersions/Create/" + modelID + "\">New Version</a></td></tr>";
+        return str;
+    }
+
+    function selectModel(modelID) {
+        var procemessage = "<option value='0'> Please wait...</option>";
+        $("#versionsTable").html("").show();
+        $("#faultsTable").html("").show();
+        var url = "/FaultSearch/GetVersionsByModel/";
+        modelID = modelID.replace("modelEdit", "");
+        $.ajax({
+            url: url,
+            data: { carModel: modelID },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+                //alert(data);
+                var markup = getVersionHeader();
+
+                for (var x = 0; x < data.length; x++) {
+
+                    markup += "<tr id=\"modelEdit" + data[x].carVersionID + "\" onclick=\"selectVersion(this.id);\">";
+                    markup += "<td>" + data[x].version + "</td>";
+                    markup += "<td class=\"editMakeFunc\">";
+                    markup += "<a href=\"/CarVersion/Edit/" + data[x].carVersionID + "\">Edit</a> |";
+                    markup += "<a href=\"/CarVersion/Details/" + data[x].carVersionID + "\">Details</a> |";
+                    markup += "<a href=\"/CarVersion/Delete/" + data[x].carVersionID + "\">Delete</a> |";
+                    markup += "</td>";
+                    markup += "</tr>";
+
+
+                }
+                markup = addVersionCreate(markup, modelID);
+                $("#versionsTable").html(markup).show();
+                //markup += "<option value=" + data[x].carVersionID.toString() + ">" + data[x].version + "</option>";
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        })
+    };
+
+    function getFaultHeader() {
+        var str = "";
+        str += "<tr><td colspan=\"2\" class=\"carMakeLabel\">Car Faults</td></tr>";
+        return str;
+    }
+    function addFaultCreate(str, versionID) {
+        str += "<tr><td colspan=\"2\" id=\"carNewFault\"><a href=\"CarFaults/ConnectTo/" + versionID+ "\">Add fault</a></td></tr>";
+        return str;
+    }
+
+    function selectVersion(versionID) {
+        var procemessage = "<option value='0'> Please wait...</option>";
+        $("#faultsTable").html("").show();
+        var url = "/FaultSearch/GetVersionFaults/";
+        versionID = versionID.replace("modelEdit", "");
+        $.ajax({
+            url: url,
+            data: { carVersion: versionID },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+                //alert(data);
+                var markup = getFaultHeader();
+
+                for (var x = 0; x < data.length; x++) {
+
+                    markup += "<tr id=\"modelEdit" + data[x].versionID + "\">";
+                    markup += "<td>" + data[x].faultName + "</td>";
+                    markup += "<td class=\"editMakeFunc\">";
+                    markup += "<a href=\"/CarFaults/RemoveConnection/" + data[x].faultID + "?versionID=" + data[x].versionID + "\">Remove</a>";
+                    //markup += "<a asp-controller=\"CarVersion\" asp-action=\"Remove\" asp-route-faultID=\"" + data[x].faultID + "\" asp-route-versionid=\"" + data[x].versionID + "\">Remove</a>";
+                    markup += "</td>";
+                    markup += "</tr>";
+
+
+                }
+                markup = addFaultCreate(markup, versionID);
+                $("#faultsTable").html(markup).show();
+                //markup += "<option value=" + data[x].carVersionID.toString() + ">" + data[x].version + "</option>";
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        })
+    };
+</script>
+
+<h2>Edit mode</h2>
+
+
+
+<div class="tableDiv">
+    <table class="table table-condensed">
+        <thead>
+        </thead>
+        <tbody id="makesTable">
+            <tr>
+                <td colspan="2" class="carMakeLabel">Car make</td>
+            </tr>
+            @foreach (var item in (IEnumerable<ProjektPracownia.Models.CarMake>)ViewBag.carMakes)
+            {
+            <tr id="makeEdit@(item.CarMakeID)" onclick="selectMake(this.id);">
+                <td> @item.make</td>
+                <td class="editMakeFunc">
+                    <a asp-controller="CarMakes" asp-action="Edit" asp-route-id="@item.CarMakeID" asp-route-text="@item.make">Edit</a> |
+                    <a asp-controller="CarMakes" asp-action="Details" asp-route-id="@item.CarMakeID">Details</a> |
+                    <a asp-controller="CarMakes" asp-action="Delete" asp-route-id="@item.CarMakeID">Delete</a>
+                </td>
+            </tr>
+            }
+
+            <tr>
+                <td colspan="2" id="carNewMake">
+                <a asp-controller="CarMakes" asp-action="Create">New make</a>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<div class="tableDiv">
+    <table class="table table-condensed">
+
+        <thead>
+        </thead>
+        <tbody id="modelsTable">
+
+        </tbody>
+    </table>
+</div>
+
+<div class="tableDiv">
+    <table class="table table-condensed">
+        <thead>
+        </thead>
+        <tbody id="versionsTable">
+
+        </tbody>
+    </table>
+</div>
+
+<div class="tableDiv">
+    <table class="table table-condensed">
+        <thead>
+        </thead>
+        <tbody id="faultsTable"></tbody>
+    </table>
+</div>

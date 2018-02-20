@@ -1,0 +1,16 @@
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia.tests\bin\Debug\netcoreapp2.0\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia.tests\bin\Debug\netcoreapp2.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia.tests\bin\Debug\netcoreapp2.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia.tests\bin\Debug\netcoreapp2.0\ProjektPracownia.tests.deps.json
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia.tests\bin\Debug\netcoreapp2.0\ProjektPracownia.tests.runtimeconfig.json
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia.tests\bin\Debug\netcoreapp2.0\ProjektPracownia.tests.runtimeconfig.dev.json
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia.tests\bin\Debug\netcoreapp2.0\ProjektPracownia.tests.dll
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia.tests\bin\Debug\netcoreapp2.0\ProjektPracownia.dll
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia.tests\bin\Debug\netcoreapp2.0\ProjektPracownia.pdb
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia.tests\obj\Debug\netcoreapp2.0\ProjektPracownia.tests.csprojResolveAssemblyReference.cache
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia.tests\obj\Debug\netcoreapp2.0\ProjektPracownia.tests.csproj.CoreCompileInputs.cache
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia.tests\obj\Debug\netcoreapp2.0\ProjektPracownia.tests.AssemblyInfoInputs.cache
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia.tests\obj\Debug\netcoreapp2.0\ProjektPracownia.tests.AssemblyInfo.cs
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia.tests\bin\Debug\netcoreapp2.0\ProjektPracownia.tests.pdb
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia.tests\obj\Debug\netcoreapp2.0\ProjektPracownia.tests.dll
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia.tests\obj\Debug\netcoreapp2.0\ProjektPracownia.tests.pdb

@@ -1,0 +1,36 @@
+﻿@model ProjektPracownia.Models.CarFault
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CarFault</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.severity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.severity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.fixCost)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.fixCost)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.CarFaultID">Edit</a> |
+    <a asp-controller="CarEdit" asp-action="Index">Back to List</a>
+</div>

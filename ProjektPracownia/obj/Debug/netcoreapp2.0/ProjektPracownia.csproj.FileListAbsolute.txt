@@ -1,0 +1,11 @@
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia\bin\Debug\netcoreapp2.0\ProjektPracownia.deps.json
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia\bin\Debug\netcoreapp2.0\ProjektPracownia.runtimeconfig.json
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia\bin\Debug\netcoreapp2.0\ProjektPracownia.runtimeconfig.dev.json
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia\bin\Debug\netcoreapp2.0\ProjektPracownia.dll
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia\bin\Debug\netcoreapp2.0\ProjektPracownia.pdb
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia\obj\Debug\netcoreapp2.0\ProjektPracownia.csproj.CoreCompileInputs.cache
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia\obj\Debug\netcoreapp2.0\ProjektPracownia.AssemblyInfoInputs.cache
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia\obj\Debug\netcoreapp2.0\ProjektPracownia.AssemblyInfo.cs
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia\obj\Debug\netcoreapp2.0\ProjektPracownia.dll
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia\obj\Debug\netcoreapp2.0\ProjektPracownia.pdb
+D:\Development\ProjektPracownia\ProjektPracownia\ProjektPracownia\obj\Debug\netcoreapp2.0\ProjektPracownia.csprojResolveAssemblyReference.cache
