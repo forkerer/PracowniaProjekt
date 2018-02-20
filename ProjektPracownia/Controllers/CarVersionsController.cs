@@ -85,7 +85,13 @@ namespace ProjektPracownia.Controllers
             {
                 return NotFound();
             }
-            ViewData["CarModelID"] = new SelectList(_context.CarModels, "CarModelID", "model", carVersion.CarModelID);
+            var list = await (from m in _context.CarModels
+                        join c in _context.CarVersion
+                        on m.CarModelID equals c.CarModelID
+                        where c.CarVersionID == id
+                        select m).ToListAsync();
+
+            ViewData["CarModelID"] = new SelectList(list, "CarModelID", "model", carVersion.CarModelID);
             return View(carVersion);
         }
 

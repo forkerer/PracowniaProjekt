@@ -13355,11 +13355,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "D:\\Development\\ProjektPracownia\\ProjektPracownia\\ProjektPracownia\\ProjektPracownia.csproj",
+      "projectUniqueName": "D:\\Development\\Projekt\\PracowniaProjekt\\ProjektPracownia\\ProjektPracownia.csproj",
       "projectName": "ProjektPracownia",
-      "projectPath": "D:\\Development\\ProjektPracownia\\ProjektPracownia\\ProjektPracownia\\ProjektPracownia.csproj",
+      "projectPath": "D:\\Development\\Projekt\\PracowniaProjekt\\ProjektPracownia\\ProjektPracownia.csproj",
       "packagesPath": "C:\\Users\\Kamil\\.nuget\\packages\\",
-      "outputPath": "D:\\Development\\ProjektPracownia\\ProjektPracownia\\ProjektPracownia\\obj\\",
+      "outputPath": "D:\\Development\\Projekt\\PracowniaProjekt\\ProjektPracownia\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

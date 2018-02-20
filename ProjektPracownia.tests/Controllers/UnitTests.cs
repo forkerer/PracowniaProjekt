@@ -147,5 +147,37 @@ namespace ProjektPracownia.tests
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
 
         }
+
+        [TestMethod]
+        public async Task VersionCantBeEditedWithoutIDSpecified()
+        {
+            var options = new DbContextOptionsBuilder<FaultsContext>();
+#pragma warning disable CS0618 // Type or member is obsolete
+            options.UseInMemoryDatabase();
+#pragma warning restore CS0618 // Type or member is obsolete
+            var _dbContext = new FaultsContext(options.Options);
+
+            var carMakesControler = new CarVersionsController(_dbContext);
+            var result = await carMakesControler.Edit(null) as ActionResult;
+
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+
+        }
+
+        [TestMethod]
+        public async Task VersionCantBeEditedWithoutVersionExisting()
+        {
+            var options = new DbContextOptionsBuilder<FaultsContext>();
+#pragma warning disable CS0618 // Type or member is obsolete
+            options.UseInMemoryDatabase();
+#pragma warning restore CS0618 // Type or member is obsolete
+            var _dbContext = new FaultsContext(options.Options);
+
+            var carMakesControler = new CarVersionsController(_dbContext);
+            var result = await carMakesControler.Edit(-1) as ActionResult;
+
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+
+        }
     }
 }

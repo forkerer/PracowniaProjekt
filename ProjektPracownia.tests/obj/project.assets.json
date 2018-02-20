@@ -14247,11 +14247,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "D:\\Development\\ProjektPracownia\\ProjektPracownia\\ProjektPracownia.tests\\ProjektPracownia.tests.csproj",
+      "projectUniqueName": "D:\\Development\\Projekt\\PracowniaProjekt\\ProjektPracownia.tests\\ProjektPracownia.tests.csproj",
       "projectName": "ProjektPracownia.tests",
-      "projectPath": "D:\\Development\\ProjektPracownia\\ProjektPracownia\\ProjektPracownia.tests\\ProjektPracownia.tests.csproj",
+      "projectPath": "D:\\Development\\Projekt\\PracowniaProjekt\\ProjektPracownia.tests\\ProjektPracownia.tests.csproj",
       "packagesPath": "C:\\Users\\Kamil\\.nuget\\packages\\",
-      "outputPath": "D:\\Development\\ProjektPracownia\\ProjektPracownia\\ProjektPracownia.tests\\obj\\",
+      "outputPath": "D:\\Development\\Projekt\\PracowniaProjekt\\ProjektPracownia.tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -14270,8 +14270,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "D:\\Development\\ProjektPracownia\\ProjektPracownia\\ProjektPracownia\\ProjektPracownia.csproj": {
-              "projectPath": "D:\\Development\\ProjektPracownia\\ProjektPracownia\\ProjektPracownia\\ProjektPracownia.csproj"
+            "D:\\Development\\Projekt\\PracowniaProjekt\\ProjektPracownia\\ProjektPracownia.csproj": {
+              "projectPath": "D:\\Development\\Projekt\\PracowniaProjekt\\ProjektPracownia\\ProjektPracownia.csproj"
             }
           }
         }
