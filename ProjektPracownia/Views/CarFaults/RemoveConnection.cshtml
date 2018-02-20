@@ -8,18 +8,19 @@
 
         function RemoveConnection(faultID, versionID) {
             var url = "/CarFaults/DisconnectFault/";
-            alert(url);
+            alert(faultID + " - " + versionID);
+
             $.ajax({
                 url: url,
-                data: { faultID: faultID, versionID: @ViewBag.versionID },
+                data: { id: faultID, versionID: versionID },
                 cache: false,
                 type: "POST",
                 success: function (data) {
 
-                    //window.location.href = '/CarEdit/Index';
+                    window.location.href = '/CarEdit/Index';
                 },
                 error: function (reponse) {
-                    alert("error : " + reponse);
+                    alert("error : " + reponse.responseText);
                 }
             })
         };

@@ -215,16 +215,19 @@ namespace ProjektPracownia.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DisconnectFault(int faultID, int versionID)
+        public async Task<IActionResult> DisconnectFault(int id, int versionID)
         {
             //_context.FaultConnections.Add(new FaultConnection(faultID, versionID));
-            var conn = await (from c in _context.FaultConnections
-                        where c.CarFaultID == faultID
-                        where c.CarVersionID == versionID
-                        select c).FirstAsync();
-            _context.FaultConnections.Remove(conn);
-            await _context.SaveChangesAsync();
-            return Json("");
+            var conn = (from c in _context.FaultConnections
+                        //where c.CarFaultID == id && c.CarVersionID == versionID
+                        select c).ToList();
+            if (conn != null)
+            {
+                //_context.FaultConnections.Remove(conn);
+                await _context.SaveChangesAsync();
+                return Json("");
+            }
+            return NotFound();
         }
     }
 }

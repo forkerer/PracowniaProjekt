@@ -126,7 +126,7 @@ namespace ProjektPracownia.tests
             var _dbContext = new FaultsContext(options.Options);
 
             var carMakesControler = new CarFaultsController(_dbContext);
-            var result = await carMakesControler.RemoveConnection(2, null-3) as ActionResult;
+            var result = await carMakesControler.RemoveConnection(2, -3) as ActionResult;
 
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
 

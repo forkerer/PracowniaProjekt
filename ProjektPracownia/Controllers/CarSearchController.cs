@@ -52,8 +52,7 @@ namespace ProjektPracownia.Controllers
                 if (faultID != "0")
                 {
                     int numFault = 0;
-                    Int32.TryParse(faultID, out numFault);
-                    if (numFault != null)
+                    if (Int32.TryParse(faultID, out numFault))
                     {
                         var faults = await (from f in _context.CarFaults
                                             join c in _context.FaultConnections
